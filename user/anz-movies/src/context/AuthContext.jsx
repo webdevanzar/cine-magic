@@ -1,23 +1,27 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 
 export const AuthContext = createContext();
 
+const USER_URL = import.meta.env.VITE_USER_URL;
+
 export const AuthProvider = ({ children }) => {
   const [auth, setAuth] = useState(null);
-  const [isSubmitting,setIsSubmitting] = useState(false)
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   // Check authentication status when app loads
   const checkAuthStatus = async () => {
     try {
-      const response = await axios.get("http://localhost:3007/api/users/me", {
+      const response = await axios.get(`${USER_URL}/me`, {
         withCredentials: true, // Ensure cookies are included
       });
-      
+
       setAuth(response.data);
     } catch (error) {
-      console.error("Authentication check failed:", error.response?.data?.message);
+      console.error(
+        "Authentication check failed:",
+        error.response?.data?.message
+      );
       setAuth(null);
     }
   };
@@ -26,10 +30,8 @@ export const AuthProvider = ({ children }) => {
     checkAuthStatus();
   }, []);
 
-
-
   const signup = async (username, password) => {
-    const response = await axios("http://localhost:3007/api/users/signup", {
+    const response = await axios(`${USER_URL}/signup`, {
       method: "POST",
       data: {
         username: username,
@@ -42,11 +44,15 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (username, password) => {
     try {
-      await axios.post("http://localhost:3007/api/users/login", {
-        username,
-        password,
-      }, { withCredentials: true });
-  
+      await axios.post(
+        `${USER_URL}/login`,
+        {
+          username,
+          password,
+        },
+        { withCredentials: true }
+      );
+
       await checkAuthStatus(); // Ensure state updates AFTER login
     } catch (error) {
       console.error("Login failed:", error.response?.data?.message);
@@ -61,16 +67,22 @@ export const AuthProvider = ({ children }) => {
     }));
   };
 
-
-
   const logout = () => {
     setAuth(null);
   };
 
- 
   return (
     <AuthContext.Provider
-      value={{ handleChange, signup, login, setAuth, logout, auth ,setIsSubmitting,isSubmitting}}
+      value={{
+        handleChange,
+        signup,
+        login,
+        setAuth,
+        logout,
+        auth,
+        setIsSubmitting,
+        isSubmitting,
+      }}
     >
       {children}
     </AuthContext.Provider>
