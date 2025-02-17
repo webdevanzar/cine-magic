@@ -13,10 +13,6 @@ const {
 
 router.get("/", users);
 router.get("/me", checkAuth, profile);
-// router.get("/profile", async (req, res) => {
-//   const user = await Users.findById(req.userId);
-//   res.json(user);
-// });
 router.post("/signup", signup);
 router.post("/login", login);
 router.put("/watchlater/:userId", addToWatchLater);
