@@ -1,0 +1,38 @@
+ul.react-paginate {
+    margin-bottom: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: center;
+    list-style-type: none;
+    width: 100%;
+    color: white;
+  }
+  
+  ul.react-paginate li a {
+    border-radius: 7px;
+    padding: 0.5rem 1rem;
+    margin-inline: 3px;
+    border: rgb(169, 169, 169) 1px solid;
+    cursor: pointer;
+  }
+  ul.react-paginate li.previous a,
+  ul.react-paginate li.next a,
+  ul.react-paginate li.break a {
+    /* border-color: transparent; */
+    background-color: rgba(143, 86, 236, 0.717);
+    color : white;
+  }
+  ul.react-paginate li.selected a {
+    background-color: rgba(90, 33, 182, 0.696);
+    border-color: rgb(245, 240, 252);
+    color: white;
+    min-width: 32px;
+  }
+  ul.react-paginate li.disabled a {
+    color: grey;
+  }
+  ul.react-paginate li.disable,
+  ul.react-paginate li.disabled a {
+    cursor: default;
+  }
