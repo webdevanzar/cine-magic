@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import "./pagination.css";
+import { useEffect } from "react";
+import "./Pagination.css";
 import ReactPaginate from "react-paginate";
 
 export const Pagination = ({ pageCount, setCurrentPage, fetchMovies }) => {
