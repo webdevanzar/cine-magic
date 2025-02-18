@@ -14,7 +14,6 @@ connectDb();
 app.use(
   cors({
     origin: [
-      "http://localhost:5174",
       "https://cine-magic-gamma.vercel.app",
       "https://cine-magic-git-main-anzarsha3240-gmailcoms-projects.vercel.app",
       "https://cine-magic-app-steel.vercel.app",

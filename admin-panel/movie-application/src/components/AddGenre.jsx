@@ -19,7 +19,7 @@ export const AddGenre = () => {
       const response = await axios.get(GENRE_URL);
       setGenres(response.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -33,6 +33,7 @@ export const AddGenre = () => {
       return toast.error("Plese Enter Genre");
     }
     try {
+      const toastId = toast.loading("Please wait...");
       const response = await axios(GENRE_URL, {
         method: "POST",
         data: {
@@ -43,6 +44,12 @@ export const AddGenre = () => {
       genres.push(response.data);
       setText("");
       setIsEdit(false);
+      toast.update(toastId, {
+        render: "Added succesfully",
+        type: "success",
+        isLoading: false,
+        autoClose: 2500,
+      });
     } catch (error) {
       toast.error(error.response.data.message);
       setText("");

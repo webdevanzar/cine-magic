@@ -62,7 +62,7 @@ const login = async (req, res) => {
     const { password, username } = req.body;
 
     if (!(password || username)) {
-      return res.status(401).json({
+      return res.status(404).json({
         message: "password/username empty",
       });
     }
@@ -70,14 +70,14 @@ const login = async (req, res) => {
     const user = await Users.findOne({ name: username });
 
     if (!user) {
-      return res.status(401).json({
+      return res.status(404).json({
         message: "username is not exist",
       });
     }
 
     const validPassword = await comparePasswordHash(password, user.password);
     if (!validPassword) {
-      return res.status(401).json({
+      return res.status(404).json({
         message: "Password is not valid",
       });
     }

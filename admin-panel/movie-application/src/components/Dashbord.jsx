@@ -12,7 +12,7 @@ export const Dashbord = () => {
       const response = await axios(`${MOVIE_URL}/admin`);
       setMovieList(response.data);
     } catch (error) {
-      console.log(error);
+      toast.error(error.response.data.message);
     }
   };
 
@@ -64,7 +64,6 @@ export const Dashbord = () => {
   useEffect(() => {
     fetchMovies();
   }, []);
-  console.log(movieList);
 
   return (
     <div className="flex justify-start items-center flex-wrap gap-7 md:mx-96 w-2/3 mx-auto md:my-32  my-28 ">

@@ -23,7 +23,6 @@ export const Home = () => {
           limit: 4,
         },
       });
-      console.log(response);
       
       setPageCount(Math.ceil(response.data.pageCount));
       setMovies(response.data.movieList);
@@ -51,7 +50,6 @@ export const Home = () => {
       });
       toast.dismiss();
       toast.success("added");
-      console.log(response);
     } catch (error) {
       toast.dismiss();
       toast.error(error.response.data.message);
