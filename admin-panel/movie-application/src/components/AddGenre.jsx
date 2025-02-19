@@ -51,6 +51,7 @@ export const AddGenre = () => {
         autoClose: 2500,
       });
     } catch (error) {
+      toast.dismiss()
       toast.error(error.response.data.message);
       setText("");
     }
